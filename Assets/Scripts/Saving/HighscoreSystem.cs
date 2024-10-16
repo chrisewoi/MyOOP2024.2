@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using TMPro;
 
 public class HighscoreSystem : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class HighscoreSystem : MonoBehaviour
 
     public int maxScores = 10;
 
+    public Transform panel;
+    public TMP_Text textPrefab;
+
     private void Start()
     {
         RefreshScoreDisplay();
@@ -17,9 +21,18 @@ public class HighscoreSystem : MonoBehaviour
 
     private void RefreshScoreDisplay()
     {
-        for(int i = 0; i < scores.Count ;i++)
+        for(int i = panel.childCount - 1; i >= 0; i--) 
         {
-            Debug.Log(names[i] + " scored: " + scores[i]);
+            Destroy(panel.GetChild(i).gameObject);
+        }
+
+        for (int i = 0; i < scores.Count; i++)
+        {
+            TMP_Text text = Instantiate(textPrefab,panel);
+            text.text = names[i];
+
+            text = Instantiate(textPrefab, panel);
+            text.text = scores[i].ToString();
         }
     }
 
