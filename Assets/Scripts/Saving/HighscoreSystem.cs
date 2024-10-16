@@ -36,6 +36,12 @@ public class HighscoreSystem : MonoBehaviour
         }
     }
 
+    string[] possibleNames = { "asd", "serer", "dsfdsf", "sdfsd" };
+    public void NewScore(float score)
+    {
+        NewScore(possibleNames[Random.Range(0,possibleNames.Length)] ,score);
+    }
+    
     public void NewScore(string name, float score)
     {
         for(int index = 0; index < scores.Count ; index ++)
